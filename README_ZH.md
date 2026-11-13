@@ -18,7 +18,7 @@
 
 ![Vivid 实机操作演示（60fps 因果同框版）](./docs/assets/hero-demo.gif)
 
-🎬 **[查看 1080p 60fps 高清完整宣传片 (`vivid-promo.mp4`)](./docs/assets/vivid-promo.mp4)** · 本地可复现命令：`pnpm run promo`
+🎬 **[查看 1080p 60fps 高清完整宣传片 (`vivid-promo.mp4`)](./docs/assets/vivid-promo.mp4)** · 本地可复现命令：`npm run promo`
 
 </div>
 
@@ -96,9 +96,9 @@
 ```bash
 git clone https://github.com/Yuki-zik/obsidian-vivid.git
 cd obsidian-vivid
-pnpm install
-pnpm test       # 运行全部 35 项单元与安全沙箱测试
-pnpm run sync   # 自动编译打包并同步至本机已注册的所有 Obsidian 仓库！
+npm install
+npm test        # 运行全部 35 项单元与安全沙箱测试
+npm run sync    # 自动编译打包并同步至本机已注册的所有 Obsidian 仓库！
 ```
 随后在 Obsidian **设置 → 第三方插件** 中启用 **Vivid** 即可（推荐打开随附的 [examples/Vivid-Showcase.md](./examples/Vivid-Showcase.md) 体验全部实机交互）。
 

@@ -18,7 +18,7 @@
 
 ![Vivid Interactive Demo (60fps Capture)](./docs/assets/hero-demo.gif)
 
-🎬 **[Watch 1080p 60fps Promo Video (`vivid-promo.mp4`)](./docs/assets/vivid-promo.mp4)** · Reproduce locally via `pnpm run promo`
+🎬 **[Watch 1080p 60fps Promo Video (`vivid-promo.mp4`)](./docs/assets/vivid-promo.mp4)** · Reproduce locally via `npm run promo`
 
 </div>
 
@@ -100,10 +100,10 @@ Includes responsive KPI sparkline cards, vertical roadmaps, side-by-side compari
 ```bash
 git clone https://github.com/Yuki-zik/obsidian-vivid.git
 cd obsidian-vivid
-pnpm install
-pnpm run lint
-pnpm test
-pnpm run build
+npm install
+npm run lint
+npm test
+npm run build
 ```
 Open [examples/Vivid-Showcase.md](./examples/Vivid-Showcase.md) inside Obsidian to test every block type.
 

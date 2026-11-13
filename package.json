@@ -16,7 +16,7 @@
   "scripts": {
     "dev": "node esbuild.config.mjs",
     "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
-    "sync": "pnpm run build && node scripts/sync-vaults.mjs",
+    "sync": "npm run build && node scripts/sync-vaults.mjs",
     "promo": "node scripts/record-promo-video.mjs",
     "test": "vitest run",
     "lint": "eslint . --max-warnings 0",
