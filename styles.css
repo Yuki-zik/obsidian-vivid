@@ -173,16 +173,16 @@
   background-size: 18px 18px;
 }
 
-.gpt-rich-svg-viewport.backdrop-light,
-.gpt-rich-svg-modal-stage.backdrop-light {
-  background-color: #ffffff !important;
+.gpt-rich-card .gpt-rich-svg-viewport.backdrop-light,
+.gpt-rich-lightbox-modal .gpt-rich-svg-modal-stage.backdrop-light {
+  background-color: #ffffff;
   background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px);
   color: #0f172a;
 }
 
-.gpt-rich-svg-viewport.backdrop-dark,
-.gpt-rich-svg-modal-stage.backdrop-dark {
-  background-color: #141418 !important;
+.gpt-rich-card .gpt-rich-svg-viewport.backdrop-dark,
+.gpt-rich-lightbox-modal .gpt-rich-svg-modal-stage.backdrop-dark {
+  background-color: #141418;
   background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px);
   color: #f3f4f6;
 }
@@ -255,13 +255,13 @@
   white-space: nowrap;
 }
 
-.gpt-rich-table-search {
-  height: 27px !important;
-  font-size: 12px !important;
-  padding: 0 10px !important;
-  border-radius: 7px !important;
-  border: 1px solid var(--background-modifier-border) !important;
-  background: var(--background-primary) !important;
+.gpt-rich-card input[type="search"].gpt-rich-table-search {
+  height: 27px;
+  font-size: 12px;
+  padding: 0 10px;
+  border-radius: 7px;
+  border: 1px solid var(--background-modifier-border);
+  background: var(--background-primary);
   max-width: 240px;
   width: 100%;
 }
@@ -273,14 +273,16 @@
   overflow-y: auto;
 }
 
-.gpt-rich-table {
-  width: 100% !important;
-  border-collapse: collapse !important;
-  margin: 0 !important;
+.markdown-rendered .gpt-rich-card table.gpt-rich-table,
+.gpt-rich-card table.gpt-rich-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
   font-size: 13px;
 }
 
-.gpt-rich-table thead th {
+.markdown-rendered .gpt-rich-card table.gpt-rich-table thead th,
+.gpt-rich-card table.gpt-rich-table thead th {
   position: sticky;
   top: 0;
   z-index: 2;
@@ -288,17 +290,18 @@
   color: var(--text-muted);
   font-weight: 600;
   font-size: 12px;
-  padding: 9px 13px !important;
-  border-bottom: 1px solid var(--background-modifier-border) !important;
-  border-top: none !important;
-  border-left: none !important;
-  border-right: none !important;
+  padding: 9px 13px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  border-top: none;
+  border-left: none;
+  border-right: none;
   cursor: pointer;
   user-select: none;
   white-space: nowrap;
 }
 
-.gpt-rich-table thead th:hover {
+.markdown-rendered .gpt-rich-card table.gpt-rich-table thead th:hover,
+.gpt-rich-card table.gpt-rich-table thead th:hover {
   color: var(--text-normal);
   background: var(--background-modifier-hover);
 }
@@ -319,26 +322,30 @@
   color: var(--interactive-accent, #6366f1);
 }
 
-.gpt-rich-table tbody td {
-  padding: 9px 13px !important;
-  border-bottom: 1px solid var(--background-modifier-border) !important;
-  border-left: none !important;
-  border-right: none !important;
+.markdown-rendered .gpt-rich-card table.gpt-rich-table tbody td,
+.gpt-rich-card table.gpt-rich-table tbody td {
+  padding: 9px 13px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  border-left: none;
+  border-right: none;
   color: var(--text-normal);
   vertical-align: middle;
 }
 
-.gpt-rich-table tbody tr:last-child td {
-  border-bottom: none !important;
+.markdown-rendered .gpt-rich-card table.gpt-rich-table tbody tr:last-child td,
+.gpt-rich-card table.gpt-rich-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
-.gpt-rich-table tbody tr:hover td {
+.markdown-rendered .gpt-rich-card table.gpt-rich-table tbody tr:hover td,
+.gpt-rich-card table.gpt-rich-table tbody tr:hover td {
   background: rgba(128, 128, 128, 0.05);
 }
 
-.gpt-rich-table-tfoot td {
-  padding: 8px 13px !important;
-  border-top: 1px solid var(--background-modifier-border) !important;
+.markdown-rendered .gpt-rich-card table.gpt-rich-table tfoot.gpt-rich-table-tfoot td,
+.gpt-rich-card table.gpt-rich-table tfoot.gpt-rich-table-tfoot td {
+  padding: 8px 13px;
+  border-top: 1px solid var(--background-modifier-border);
   background: var(--background-secondary);
   font-size: 11.5px;
   font-weight: 600;
@@ -359,10 +366,11 @@
 .gpt-rich-table .align-center { text-align: center; }
 .gpt-rich-table .align-right { text-align: right; }
 
-.gpt-rich-table-empty {
-  text-align: center !important;
-  padding: 24px !important;
-  color: var(--text-muted) !important;
+.markdown-rendered .gpt-rich-card table.gpt-rich-table tbody td.gpt-rich-table-empty,
+.gpt-rich-card table.gpt-rich-table tbody td.gpt-rich-table-empty {
+  text-align: center;
+  padding: 24px;
+  color: var(--text-muted);
 }
 
 /* Badges, Deltas & Inline Progress Bars */
@@ -475,8 +483,8 @@
   gap: 12px;
 }
 
-.gpt-rich-kpi-card {
-  margin: 0 !important;
+.gpt-rich-kpi-grid .gpt-rich-card.gpt-rich-kpi-card {
+  margin: 0;
   padding: 14px 16px;
   display: flex;
   flex-direction: column;
@@ -747,14 +755,14 @@
   flex-shrink: 0;
 }
 
-.gpt-rich-quiz-opt.is-correct {
-  border-color: #10b981 !important;
-  background: rgba(16, 185, 129, 0.12) !important;
+.gpt-rich-card button.gpt-rich-quiz-opt.is-correct {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
 }
 
-.gpt-rich-quiz-opt.is-wrong {
-  border-color: #f43f5e !important;
-  background: rgba(244, 63, 94, 0.12) !important;
+.gpt-rich-card button.gpt-rich-quiz-opt.is-wrong {
+  border-color: #f43f5e;
+  background: rgba(244, 63, 94, 0.12);
 }
 
 .gpt-rich-quiz-feedback {
@@ -851,13 +859,14 @@
   justify-content: flex-end;
 }
 
-.gpt-rich-source-pre {
-  margin: 0 !important;
-  padding: 14px !important;
+.markdown-rendered .gpt-rich-card pre.gpt-rich-source-pre,
+.gpt-rich-card pre.gpt-rich-source-pre {
+  margin: 0;
+  padding: 14px;
   max-height: 360px;
   overflow: auto;
-  font-size: 12px !important;
-  background: transparent !important;
+  font-size: 12px;
+  background: transparent;
 }
 
 .gpt-rich-error-card {
@@ -877,30 +886,32 @@
 }
 
 /* Fullscreen Lightbox Modal */
-.gpt-rich-lightbox-modal {
-  width: min(92vw, 1120px) !important;
-  max-width: 1120px !important;
+.modal.gpt-rich-lightbox-modal {
+  width: min(92vw, 1120px);
+  max-width: 1120px;
 }
 
 /* 7. Obsidian Vault-Native Deep Integrations (Wikilinks, Tags & SVG Interactive Nodes) */
-.gpt-rich-wikilink {
+.markdown-rendered .gpt-rich-card a.gpt-rich-wikilink,
+.gpt-rich-card a.gpt-rich-wikilink {
   color: var(--link-color, var(--interactive-accent, #6366f1));
-  text-decoration: underline;
-  text-decoration-color: rgba(99, 102, 241, 0.35);
-  text-underline-offset: 2px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.35);
   font-weight: 500;
   cursor: pointer;
-  transition: color 0.14s ease, background-color 0.14s ease;
-  border-radius: 4px;
+  transition: color 0.14s ease, background-color 0.14s ease, border-color 0.14s ease;
+  border-radius: 3px;
   padding: 0 2px;
 }
 
-.gpt-rich-wikilink:hover {
+.markdown-rendered .gpt-rich-card a.gpt-rich-wikilink:hover,
+.gpt-rich-card a.gpt-rich-wikilink:hover {
   color: var(--link-color-hover, #4f46e5);
   background: rgba(99, 102, 241, 0.1);
 }
 
-.gpt-rich-tag-pill {
+.markdown-rendered .gpt-rich-card a.gpt-rich-tag-pill,
+.gpt-rich-card a.gpt-rich-tag-pill {
   display: inline-flex;
   align-items: center;
   padding: 1px 7px;
@@ -910,12 +921,13 @@
   border-radius: 999px;
   background: var(--tag-background, rgba(99, 102, 241, 0.12));
   color: var(--tag-color, var(--interactive-accent, #6366f1));
-  text-decoration: none !important;
+  text-decoration: none;
   cursor: pointer;
   transition: filter 0.14s ease, transform 0.12s ease;
 }
 
-.gpt-rich-tag-pill:hover {
+.markdown-rendered .gpt-rich-card a.gpt-rich-tag-pill:hover,
+.gpt-rich-card a.gpt-rich-tag-pill:hover {
   filter: brightness(1.08);
   transform: translateY(-0.5px);
 }
@@ -929,7 +941,9 @@
   filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.45));
 }
 
-.gpt-rich-is-hidden {
-  display: none !important;
+.gpt-rich-card .gpt-rich-is-hidden,
+.gpt-rich-card input[type="search"].gpt-rich-table-search.gpt-rich-is-hidden,
+.gpt-rich-card .gpt-rich-quiz-feedback.gpt-rich-is-hidden {
+  display: none;
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "obsidian-vivid",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "ChatGPT and Claude-grade interactive visual rendering fused with Bases, Canvas, Properties, and Wikilinks: sortable super-tables, offline ECharts, live vault analytics, pan-zoom SVGs, KPI cards, and sandboxed HTML artifacts.",
   "author": "A-Znk (https://github.com/Yuki-zik)",
   "repository": {
@@ -37,18 +37,17 @@
   "license": "MIT",
   "dependencies": {
     "dompurify": "^3.2.4",
-    "echarts": "^5.6.0"
+    "echarts": "^6.1.0"
   },
   "devDependencies": {
-    "@types/dompurify": "^3.0.5",
     "@types/node": "^22.10.0",
     "esbuild": "^0.24.2",
     "eslint": "^9.39.5",
-    "eslint-plugin-obsidianmd": "^0.5.0",
+    "eslint-plugin-obsidianmd": "^0.5.1",
     "jsdom": "^25.0.1",
     "obsidian": "latest",
     "typescript": "^5.7.2",
-    "typescript-eslint": "8.72.2-alpha.11",
+    "typescript-eslint": "^8.72.2",
     "vitest": "^2.1.8"
   }
 }
