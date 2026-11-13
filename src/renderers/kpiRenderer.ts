@@ -2,7 +2,7 @@ import { App, MarkdownRenderChild } from "obsidian";
 import { buildSparklinePath, parseKpiSpec } from "../core/kpiParser";
 import { interpolateFrontmatterVariables } from "../core/frontmatterBinding";
 import { getNoteFrontmatter } from "../ui/obsidianBridge";
-import { renderErrorCard, renderStreamingSkeleton } from "../ui/domHelpers";
+import { appendSparklineSvg, renderErrorCard, renderStreamingSkeleton } from "../ui/domHelpers";
 
 export class GptKpiRenderChild extends MarkdownRenderChild {
   private app: App;
@@ -70,7 +70,7 @@ export class GptKpiRenderChild extends MarkdownRenderChild {
               ? "#10b981"
               : "#6366f1";
         const sparkWrap = mid.createDiv({ cls: "gpt-rich-kpi-spark" });
-        sparkWrap.innerHTML = `<svg viewBox="0 0 84 28" width="84" height="28" xmlns="http://www.w3.org/2000/svg"><path d="${pathD}" fill="none" stroke="${stroke}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+        appendSparklineSvg(sparkWrap, pathD, stroke);
       }
 
       if (item.caption) {

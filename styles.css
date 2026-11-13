@@ -921,10 +921,15 @@
 }
 
 .gpt-rich-svg-link-node {
+  cursor: pointer;
   transition: filter 0.15s ease, opacity 0.15s ease;
 }
 
 .gpt-rich-svg-link-node:hover {
   filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.45));
+}
+
+.gpt-rich-is-hidden {
+  display: none !important;
 }
 

@@ -1,9 +1,9 @@
 {
   "id": "vivid",
   "name": "Vivid",
-  "version": "0.3.0",
-  "minAppVersion": "1.5.0",
-  "description": "ChatGPT & Claude-grade interactive visual rendering fused with Obsidian Bases, Canvas, Properties & Wikilinks: super-tables, offline ECharts, live Vault analytics, pan-zoom SVGs, KPIs, and sandboxed HTML artifacts.",
+  "version": "0.3.1",
+  "minAppVersion": "1.5.7",
+  "description": "ChatGPT and Claude-grade interactive visual rendering fused with Bases, Canvas, Properties, and Wikilinks: sortable super-tables, offline ECharts, live vault analytics, pan-zoom SVGs, KPI cards, and sandboxed HTML artifacts.",
   "author": "A-Znk",
   "authorUrl": "https://github.com/Yuki-zik",
   "isDesktopOnly": false

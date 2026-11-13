@@ -5,6 +5,7 @@ import { saveAndOpenJsonCanvas, saveSvgAttachmentSnapshot } from "../ui/obsidian
 import {
   copyTextWithNotice,
   isObsidianDarkTheme,
+  mountSanitizedSvg,
   renderErrorCard,
   renderStreamingSkeleton,
   triggerBlobDownload,
@@ -148,7 +149,7 @@ export class GptSvgRenderChild extends MarkdownRenderChild {
     expandBtn.addEventListener("click", () => {
       new GptLightboxModal(this.app, "SVG 矢量流程图全屏预览", (modalBody) => {
         const wrap = modalBody.createDiv({ cls: `gpt-rich-svg-modal-stage backdrop-${this.backdropMode}` });
-        wrap.innerHTML = res.svgHtml;
+        mountSanitizedSvg(wrap, res.svgHtml);
         this.activateVaultLinksInsideSvg(wrap);
       }).open();
     });
@@ -166,7 +167,7 @@ export class GptSvgRenderChild extends MarkdownRenderChild {
       cls: `gpt-rich-svg-viewport backdrop-${this.backdropMode}`
     });
     stageInner = viewport.createDiv({ cls: "gpt-rich-svg-stage" });
-    stageInner.innerHTML = res.svgHtml;
+    mountSanitizedSvg(stageInner, res.svgHtml);
     this.activateVaultLinksInsideSvg(stageInner);
     applyTransform();
 
@@ -185,7 +186,6 @@ export class GptSvgRenderChild extends MarkdownRenderChild {
       t.textContent = raw.replace(m[0], `↗ ${alias}`);
 
       const hitNode = (t.closest("g") as Element | null) ?? t;
-      (hitNode as HTMLElement).style.cursor = "pointer";
       hitNode.classList.add("gpt-rich-svg-link-node");
 
       hitNode.addEventListener("click", (ev) => {
@@ -261,7 +261,7 @@ export class GptSvgRenderChild extends MarkdownRenderChild {
     const url = URL.createObjectURL(svgBlob);
 
     img.onload = () => {
-      const canvas = document.createElement("canvas");
+      const canvas = createEl("canvas");
       canvas.width = w * scaleFactor;
       canvas.height = h * scaleFactor;
       const ctx = canvas.getContext("2d");

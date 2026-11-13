@@ -158,15 +158,14 @@ export class GptUiRenderChild extends MarkdownRenderChild {
       }
 
       const optsWrap = body.createDiv({ cls: "gpt-rich-quiz-options" });
-      const feedbackEl = body.createDiv({ cls: "gpt-rich-quiz-feedback" });
-      feedbackEl.style.display = "none";
+      const feedbackEl = body.createDiv({ cls: "gpt-rich-quiz-feedback gpt-rich-is-hidden" });
 
       let answered = false;
 
       const buildOptions = () => {
         answered = false;
         optsWrap.empty();
-        feedbackEl.style.display = "none";
+        feedbackEl.className = "gpt-rich-quiz-feedback gpt-rich-is-hidden";
         feedbackEl.empty();
 
         block.options.forEach((opt, idx) => {
@@ -187,7 +186,6 @@ export class GptUiRenderChild extends MarkdownRenderChild {
                 optsWrap.children[rightIdx]?.addClass("is-correct");
               }
             }
-            feedbackEl.style.display = "block";
             feedbackEl.className = opt.correct
               ? "gpt-rich-quiz-feedback is-correct"
               : "gpt-rich-quiz-feedback is-wrong";

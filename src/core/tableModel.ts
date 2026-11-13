@@ -32,7 +32,25 @@ function splitPipeRow(line: string): string[] {
   let trimmed = line.trim();
   if (trimmed.startsWith("|")) trimmed = trimmed.slice(1);
   if (trimmed.endsWith("|")) trimmed = trimmed.slice(0, -1);
-  return trimmed.split(/(?<!\\)\|/).map((cell) => cell.replace(/\\\|/g, "|").trim());
+
+  const cells: string[] = [];
+  let current = "";
+  for (let i = 0; i < trimmed.length; i++) {
+    const ch = trimmed[i];
+    if (ch === "\\" && trimmed[i + 1] === "|") {
+      current += "|";
+      i++;
+      continue;
+    }
+    if (ch === "|") {
+      cells.push(current.trim());
+      current = "";
+      continue;
+    }
+    current += ch;
+  }
+  cells.push(current.trim());
+  return cells;
 }
 
 export function parseMarkdownTable(markdown: string): ParsedTableData | null {
@@ -128,13 +146,14 @@ function extractRichTextPreservingCode(el: Element): string {
 export function tokenizeInlineCellText(raw: string): InlineCellToken[] {
   const tokens: InlineCellToken[] = [];
   const pattern =
-    /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]|`([^`]+)`|\*\*([^*]+)\*\*|\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|(?<=^|\s)(#(?![0-9a-fA-F]{3}(?:\b|$)|[0-9a-fA-F]{6}(?:\b|$))[a-zA-Z\u4e00-\u9fa5][\w\u4e00-\u9fa5/-]*)/g;
+    /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]|`([^`]+)`|\*\*([^*]+)\*\*|\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|(^|\s)(#(?![0-9a-fA-F]{3}(?:\b|$)|[0-9a-fA-F]{6}(?:\b|$))[a-zA-Z\u4e00-\u9fa5][\w\u4e00-\u9fa5/-]*)/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
 
   while ((match = pattern.exec(raw)) !== null) {
-    if (match.index > lastIndex) {
-      tokens.push({ type: "text", value: raw.slice(lastIndex, match.index) });
+    const prefixLen = match[7] !== undefined && match[8] !== undefined ? match[7].length : 0;
+    if (match.index + prefixLen > lastIndex) {
+      tokens.push({ type: "text", value: raw.slice(lastIndex, match.index + prefixLen) });
     }
     if (match[1] !== undefined) {
       const target = match[1].trim();
@@ -146,8 +165,8 @@ export function tokenizeInlineCellText(raw: string): InlineCellToken[] {
       tokens.push({ type: "strong", value: match[4] });
     } else if (match[5] !== undefined && match[6] !== undefined) {
       tokens.push({ type: "link", label: match[5], href: match[6] });
-    } else if (match[7] !== undefined) {
-      tokens.push({ type: "tag", tag: match[7] });
+    } else if (match[8] !== undefined) {
+      tokens.push({ type: "tag", tag: match[8] });
     }
     lastIndex = pattern.lastIndex;
   }

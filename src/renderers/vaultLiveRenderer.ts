@@ -10,6 +10,7 @@ import {
 } from "../ui/obsidianBridge";
 import { interpolateFrontmatterVariables } from "../core/frontmatterBinding";
 import {
+  appendSparklineSvg,
   isObsidianDarkTheme,
   mountWhenSizedAndConnected,
   renderErrorCard,
@@ -244,7 +245,7 @@ export class VaultLiveKpiRenderChild extends MarkdownRenderChild {
       if (item.sparkline && item.sparkline.length >= 2) {
         const d = buildSparklinePath(item.sparkline, 84, 28);
         const spark = mid.createDiv({ cls: "gpt-rich-kpi-spark" });
-        spark.innerHTML = `<svg viewBox="0 0 84 28" width="84" height="28"><path d="${d}" fill="none" stroke="#10b981" stroke-width="2.2"/></svg>`;
+        appendSparklineSvg(spark, d, "#10b981");
       }
       if (item.caption) {
         card.createDiv({ text: item.caption, cls: "gpt-rich-kpi-caption" });

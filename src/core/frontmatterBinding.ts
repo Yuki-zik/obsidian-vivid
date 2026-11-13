@@ -23,7 +23,11 @@ export function interpolateFrontmatterVariables(
       if (cur === undefined || cur === null || cur === "") {
         return fallbackRaw !== undefined ? fallbackRaw.trim() : full;
       }
-      return String(cur);
+      if (typeof cur === "string") return cur;
+      if (typeof cur === "number" || typeof cur === "boolean" || typeof cur === "bigint") {
+        return String(cur);
+      }
+      return JSON.stringify(cur);
     }
   );
 }

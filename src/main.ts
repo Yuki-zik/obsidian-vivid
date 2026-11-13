@@ -7,6 +7,7 @@ import {
   Plugin,
   PluginSettingTab,
   Setting,
+  SettingDefinitionItem,
   normalizePath,
   requestUrl
 } from "obsidian";
@@ -253,7 +254,7 @@ export default class GptRichRenderPlugin extends Plugin {
       }
 
       const folder = normalizePath(this.settings.importFolder.trim() || "GPT Imports");
-      if (!(await this.app.vault.adapter.exists(folder))) {
+      if (!this.app.vault.getAbstractFileByPath(folder)) {
         await this.app.vault.createFolder(folder);
       }
 
@@ -338,7 +339,28 @@ export default class GptRichRenderPlugin extends Plugin {
   }
 
   async loadSettings(): Promise<void> {
-    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+    const raw: unknown = await this.loadData();
+    if (raw && typeof raw === "object" && !Array.isArray(raw)) {
+      const rec = raw as Record<string, unknown>;
+      this.settings = {
+        enhanceNativeTables:
+          typeof rec.enhanceNativeTables === "boolean"
+            ? rec.enhanceNativeTables
+            : DEFAULT_SETTINGS.enhanceNativeTables,
+        importFolder:
+          typeof rec.importFolder === "string"
+            ? rec.importFolder
+            : DEFAULT_SETTINGS.importFolder,
+        aiBaseUrl:
+          typeof rec.aiBaseUrl === "string" ? rec.aiBaseUrl : DEFAULT_SETTINGS.aiBaseUrl,
+        aiApiKey:
+          typeof rec.aiApiKey === "string" ? rec.aiApiKey : DEFAULT_SETTINGS.aiApiKey,
+        aiModel:
+          typeof rec.aiModel === "string" ? rec.aiModel : DEFAULT_SETTINGS.aiModel
+      };
+    } else {
+      this.settings = { ...DEFAULT_SETTINGS };
+    }
   }
 
   async saveSettings(): Promise<void> {
@@ -354,11 +376,87 @@ class GptRichRenderSettingTab extends PluginSettingTab {
     this.plugin = plugin;
   }
 
+  getSettingDefinitions(): SettingDefinitionItem<keyof GptRichRenderSettings>[] {
+    return [
+      {
+        name: "自动增强标准 Markdown 表格",
+        desc: "在阅读视图（Reading View）以及 Copilot / Agent Client 聊天窗口中，自动将普通 Markdown 表格升级为支持搜索、智能排序、∑ 汇总、状态徽章、内嵌进度条与 CSV 导出的超级表格。",
+        control: {
+          type: "toggle",
+          key: "enhanceNativeTables",
+          defaultValue: DEFAULT_SETTINGS.enhanceNativeTables
+        }
+      },
+      {
+        name: "浏览器一键同步保存目录 (路线 A)",
+        desc: "通过 Chrome 扩展 / 油猴脚本「Send to Obsidian」导入时的默认目标文件夹。",
+        control: {
+          type: "text",
+          key: "importFolder",
+          defaultValue: DEFAULT_SETTINGS.importFolder,
+          placeholder: "GPT Imports"
+        }
+      },
+      {
+        name: "一键复制 GPT 全局输出规范提示词 (路线 B)",
+        desc: "粘贴进网页版 ChatGPT Custom Instructions 或 Obsidian Copilot / Agent Client 的 System Prompt 后，AI 输出即可 1:1 自动渲染。",
+        render: (setting) => {
+          setting.addButton((btn) =>
+            btn
+              .setButtonText("复制全局指令")
+              .setCta()
+              .onClick(() => {
+                void copyTextWithNotice(GPT_CUSTOM_INSTRUCTIONS_PROMPT, "GPT 富渲染全局指令");
+              })
+          );
+        }
+      },
+      {
+        type: "group",
+        heading: "编辑器框选右键「一键 AI 视觉化」配置（可选）",
+        items: [
+          {
+            name: "API Base URL",
+            desc: "兼容 OpenAI / DeepSeek / Claude 网关 / Ollama 本地接口。若留空 API Key，右键点击时会自动复制提示词到剪贴板。",
+            control: {
+              type: "text",
+              key: "aiBaseUrl",
+              defaultValue: DEFAULT_SETTINGS.aiBaseUrl,
+              placeholder: "https://api.openai.com/v1"
+            }
+          },
+          {
+            name: "API Key",
+            render: (setting) => {
+              setting.addText((text) => {
+                text.inputEl.type = "password";
+                text
+                  .setPlaceholder("sk-...")
+                  .setValue(this.plugin.settings.aiApiKey)
+                  .onChange(async (val) => {
+                    this.plugin.settings.aiApiKey = val;
+                    await this.plugin.saveSettings();
+                  });
+              });
+            }
+          },
+          {
+            name: "Model 名称",
+            control: {
+              type: "text",
+              key: "aiModel",
+              defaultValue: DEFAULT_SETTINGS.aiModel,
+              placeholder: "gpt-4o-mini / deepseek-chat"
+            }
+          }
+        ]
+      }
+    ];
+  }
+
   display(): void {
     const { containerEl } = this;
     containerEl.empty();
-
-    containerEl.createEl("h2", { text: "Vivid 设置 (GPT & Claude 富视觉渲染)" });
 
     new Setting(containerEl)
       .setName("自动增强标准 Markdown 表格")
@@ -401,11 +499,12 @@ class GptRichRenderSettingTab extends PluginSettingTab {
           })
       );
 
-    containerEl.createEl("h3", { text: "编辑器框选右键「一键 AI 视觉化」配置（可选）" });
-    containerEl.createEl("p", {
-      text: "兼容 OpenAI / DeepSeek / Claude 网关 / Ollama 本地接口。若留空 API Key，右键点击时会自动将组装好的转换 Prompt 复制到剪贴板供侧边栏 AI 使用。",
-      cls: "setting-item-description"
-    });
+    new Setting(containerEl)
+      .setName("编辑器框选右键「一键 AI 视觉化」配置（可选）")
+      .setDesc(
+        "兼容 OpenAI / DeepSeek / Claude 网关 / Ollama 本地接口。若留空 API Key，右键点击时会自动将组装好的转换提示词复制到剪贴板供侧边栏 AI 使用。"
+      )
+      .setHeading();
 
     new Setting(containerEl)
       .setName("API Base URL")

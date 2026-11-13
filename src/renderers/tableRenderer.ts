@@ -51,9 +51,7 @@ export function buildInteractiveTableWidget(
     placeholder: "搜索过滤表格内容…",
     cls: "gpt-rich-table-search"
   });
-  if (!searchVisible) {
-    searchInput.style.display = "none";
-  }
+  searchInput.toggleClass("gpt-rich-is-hidden", !searchVisible);
 
   const actions = topBar.createDiv({ cls: "gpt-rich-toolbar" });
 
@@ -61,7 +59,7 @@ export function buildInteractiveTableWidget(
     const searchToggleBtn = actions.createEl("button", { text: "筛选", cls: "gpt-rich-btn" });
     searchToggleBtn.addEventListener("click", () => {
       searchVisible = !searchVisible;
-      searchInput.style.display = searchVisible ? "inline-block" : "none";
+      searchInput.toggleClass("gpt-rich-is-hidden", !searchVisible);
       if (searchVisible) searchInput.focus();
     });
   }
@@ -313,8 +311,7 @@ export function enhanceNativeTableElements(
       continue;
     }
 
-    const host = document.createElement("div");
-    host.className = "gpt-rich-native-table-host";
+    const host = createDiv({ cls: "gpt-rich-native-table-host" });
     tableEl.replaceWith(host);
     buildInteractiveTableWidget(app, host, parsed, true, sourcePath, app.workspace);
   }

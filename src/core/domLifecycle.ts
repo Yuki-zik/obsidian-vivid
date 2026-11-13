@@ -16,12 +16,12 @@ export function mountWhenSizedAndConnected(
   let disposed = false;
   let lastW = 0;
   let lastH = 0;
-  const timers: ReturnType<typeof setTimeout>[] = [];
+  const timers: number[] = [];
 
   const clearTimers = () => {
     while (timers.length > 0) {
       const t = timers.pop();
-      if (t !== undefined) clearTimeout(t);
+      if (t !== undefined) window.clearTimeout(t);
     }
   };
 
@@ -63,11 +63,11 @@ export function mountWhenSizedAndConnected(
 
   check();
   if (!mounted) {
-    if (typeof requestAnimationFrame === "function") {
-      requestAnimationFrame(() => check());
+    if (typeof window.requestAnimationFrame === "function") {
+      window.requestAnimationFrame(() => check());
     }
     for (const delay of [60, 200, 600, 1500]) {
-      timers.push(setTimeout(() => check(), delay));
+      timers.push(window.setTimeout(() => check(), delay));
     }
   }
 

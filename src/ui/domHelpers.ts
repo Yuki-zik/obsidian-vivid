@@ -1,28 +1,52 @@
 import { Notice } from "obsidian";
 
 export function isObsidianDarkTheme(): boolean {
-  return document.body.classList.contains("theme-dark");
+  return activeDocument.body.classList.contains("theme-dark");
 }
 
 export function triggerBlobDownload(content: Blob | string, filename: string, mimeType = "text/plain;charset=utf-8"): void {
   const blob = content instanceof Blob ? content : new Blob([content], { type: mimeType });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
+  const a = activeDocument.body.createEl("a", {
+    href: url,
+    attr: { download: filename }
+  });
   a.click();
-  document.body.removeChild(a);
-  setTimeout(() => URL.revokeObjectURL(url), 1500);
+  a.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 1500);
 }
 
 export function triggerDataUrlDownload(dataUrl: string, filename: string): void {
-  const a = document.createElement("a");
-  a.href = dataUrl;
-  a.download = filename;
-  document.body.appendChild(a);
+  const a = activeDocument.body.createEl("a", {
+    href: dataUrl,
+    attr: { download: filename }
+  });
   a.click();
-  document.body.removeChild(a);
+  a.remove();
+}
+
+export function mountSanitizedSvg(host: HTMLElement, svgHtml: string): void {
+  const parsed = new DOMParser().parseFromString(svgHtml, "image/svg+xml");
+  const svgEl = parsed.documentElement;
+  if (svgEl.tagName.toLowerCase() === "svg" && !parsed.querySelector("parsererror")) {
+    host.appendChild(activeDocument.importNode(svgEl, true));
+  }
+}
+
+export function appendSparklineSvg(host: HTMLElement, pathD: string, stroke: string): void {
+  const svg = host.createSvg("svg", {
+    attr: { viewBox: "0 0 84 28", width: "84", height: "28" }
+  });
+  svg.createSvg("path", {
+    attr: {
+      d: pathD,
+      fill: "none",
+      stroke,
+      "stroke-width": "2.2",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
+    }
+  });
 }
 
 export async function copyTextWithNotice(text: string, label = "内容"): Promise<void> {

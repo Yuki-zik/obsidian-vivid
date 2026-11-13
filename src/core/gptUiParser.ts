@@ -38,6 +38,14 @@ function isIncompleteJson(raw: string): boolean {
   return last !== "}" && last !== "]";
 }
 
+function asText(val: unknown, fallback: string): string {
+  if (typeof val === "string") return val;
+  if (typeof val === "number" || typeof val === "boolean" || typeof val === "bigint") {
+    return String(val);
+  }
+  return fallback;
+}
+
 export function parseGptUiSpec(
   rawSource: string,
   hintLang: "timeline" | "comparison" | "quiz" | "gpt-ui" | "chatgpt-ui"
@@ -47,7 +55,7 @@ export function parseGptUiSpec(
 
   let parsed: Record<string, unknown>;
   try {
-    const val = JSON.parse(cleaned);
+    const val: unknown = JSON.parse(cleaned);
     parsed = Array.isArray(val) ? { items: val } : (val as Record<string, unknown>);
   } catch (err) {
     if (isIncompleteJson(cleaned)) return { status: "streaming" };
@@ -86,7 +94,7 @@ export function parseGptUiSpec(
             : "done";
       return {
         time: typeof r.time === "string" ? r.time : typeof r.phase === "string" ? r.phase : undefined,
-        title: String(r.title ?? r.label ?? "Step"),
+        title: asText(r.title ?? r.label, "Step"),
         detail: typeof r.detail === "string" ? r.detail : typeof r.description === "string" ? r.description : undefined,
         status,
         tag: typeof r.tag === "string" ? r.tag : undefined
@@ -108,7 +116,7 @@ export function parseGptUiSpec(
     const columns: ComparisonColumn[] = rawCols.map((col) => {
       const r = (col ?? {}) as Record<string, unknown>;
       return {
-        name: String(r.name ?? r.title ?? "Option"),
+        name: asText(r.name ?? r.title, "Option"),
         badge: typeof r.badge === "string" ? r.badge : undefined,
         summary: typeof r.summary === "string" ? r.summary : undefined,
         pros: Array.isArray(r.pros) ? r.pros.map(String) : [],
@@ -125,7 +133,7 @@ export function parseGptUiSpec(
     explicitKind === "ask_user_input" ||
     typeof parsed.question === "string"
   ) {
-    const question = String(parsed.question ?? parsed.prompt ?? "Interactive Check");
+    const question = asText(parsed.question ?? parsed.prompt, "Interactive Check");
     const rawOpts = Array.isArray(parsed.options) ? parsed.options : Array.isArray(parsed.choices) ? parsed.choices : [];
     if (rawOpts.length === 0) {
       return { status: "error", message: "Quiz block requires non-empty options array" };
@@ -136,7 +144,7 @@ export function parseGptUiSpec(
       }
       const r = (o ?? {}) as Record<string, unknown>;
       return {
-        label: String(r.label ?? r.text ?? `Option ${idx + 1}`),
+        label: asText(r.label ?? r.text, `Option ${idx + 1}`),
         correct: Boolean(r.correct ?? r.isCorrect ?? false),
         explanation: typeof r.explanation === "string" ? r.explanation : typeof r.rationale === "string" ? r.rationale : undefined
       };

@@ -34,6 +34,14 @@ function isIncomplete(raw: string): boolean {
   return last !== "}" && last !== "]";
 }
 
+function asText(val: unknown, fallback = ""): string {
+  if (typeof val === "string") return val;
+  if (typeof val === "number" || typeof val === "boolean" || typeof val === "bigint") {
+    return String(val);
+  }
+  return fallback;
+}
+
 function filterNotes(notes: VaultNoteRecord[], spec: Record<string, unknown>): VaultNoteRecord[] {
   const nestedFilter =
     spec.filter && typeof spec.filter === "object" && !Array.isArray(spec.filter)
@@ -62,7 +70,7 @@ function filterNotes(notes: VaultNoteRecord[], spec: Record<string, unknown>): V
     if (whereObj) {
       for (const [k, expected] of Object.entries(whereObj)) {
         const actual = n.frontmatter[k];
-        if (String(actual ?? "") !== String(expected)) {
+        if (asText(actual, "") !== asText(expected, "")) {
           return false;
         }
       }
@@ -79,8 +87,9 @@ function extractDimensionValues(note: VaultNoteRecord, dim: string): string[] {
   }
   const fmVal = note.frontmatter[dim];
   if (fmVal === undefined || fmVal === null || fmVal === "") return [];
-  if (Array.isArray(fmVal)) return fmVal.map((v) => String(v));
-  return [String(fmVal)];
+  if (Array.isArray(fmVal)) return fmVal.map((v) => asText(v, "")).filter(Boolean);
+  const s = asText(fmVal, "");
+  return s ? [s] : [];
 }
 
 function extractNumericMetric(note: VaultNoteRecord, field?: string): number | null {
@@ -311,7 +320,7 @@ export function aggregateVaultKpiSpec(
     }
 
     return {
-      label: String(spec.label ?? "Vault Metric"),
+      label: asText(spec.label, "Vault Metric"),
       value: `${prefix}${computed.toLocaleString()}${suffix}`,
       delta: typeof spec.delta === "string" ? spec.delta : `${matched.length} 篇匹配`,
       trend:

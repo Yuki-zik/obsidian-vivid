@@ -75,6 +75,14 @@ function isLikelyIncompleteJson(raw: string): boolean {
   return inString || depthBrace > 0 || depthBracket > 0;
 }
 
+function asText(val: unknown, fallback = ""): string {
+  if (typeof val === "string") return val;
+  if (typeof val === "number" || typeof val === "boolean" || typeof val === "bigint") {
+    return String(val);
+  }
+  return fallback;
+}
+
 export function parseChartSpec(
   rawSource: string,
   isDark: boolean,
@@ -113,6 +121,21 @@ export function parseChartSpec(
   const subtitle = typeof parsed.subtitle === "string" ? parsed.subtitle : undefined;
   const height = typeof parsed.height === "number" ? parsed.height : undefined;
 
+  const baseTooltip: Record<string, unknown> = {
+    trigger: "axis",
+    backgroundColor: tooltipBg,
+    borderColor: tooltipBorder,
+    borderWidth: 1,
+    padding: [10, 14],
+    textStyle: { color: textColor, fontSize: 12 },
+    axisPointer: {
+      type: "shadow",
+      shadowStyle: {
+        color: isDark ? "rgba(255,255,255,0.03)" : "rgba(15,23,42,0.03)"
+      }
+    }
+  };
+
   const baseTheme: Record<string, unknown> = {
     backgroundColor: "transparent",
     color: palette,
@@ -120,20 +143,7 @@ export function parseChartSpec(
       fontFamily: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
       color: textColor
     },
-    tooltip: {
-      trigger: "axis",
-      backgroundColor: tooltipBg,
-      borderColor: tooltipBorder,
-      borderWidth: 1,
-      padding: [10, 14],
-      textStyle: { color: textColor, fontSize: 12 },
-      axisPointer: {
-        type: "shadow",
-        shadowStyle: {
-          color: isDark ? "rgba(255,255,255,0.03)" : "rgba(15,23,42,0.03)"
-        }
-      }
-    }
+    tooltip: baseTooltip
   };
 
   // 1. Native ECharts option pass-through
@@ -188,7 +198,7 @@ export function parseChartSpec(
       height: height ?? 340,
       option: {
         ...baseTheme,
-        tooltip: { ...((baseTheme.tooltip as Record<string, unknown>) || {}), trigger: "item" },
+        tooltip: { ...baseTooltip, trigger: "item" },
         series: [
           {
             type: "sankey",
@@ -280,7 +290,7 @@ export function parseChartSpec(
       height: height ?? 320,
       option: {
         ...baseTheme,
-        tooltip: { ...((baseTheme.tooltip as Record<string, unknown>) || {}), position: "top", trigger: "item" },
+        tooltip: { ...baseTooltip, position: "top", trigger: "item" },
         grid: { top: 16, bottom: 44, left: 16, right: 16, containLabel: true },
         xAxis: {
           type: "category",
@@ -331,7 +341,7 @@ export function parseChartSpec(
       height: height ?? 320,
       option: {
         ...baseTheme,
-        tooltip: { ...((baseTheme.tooltip as Record<string, unknown>) || {}), trigger: "item", formatter: "{b}: <b>{c}</b>" },
+        tooltip: { ...baseTooltip, trigger: "item", formatter: "{b}: <b>{c}</b>" },
         series: [
           {
             type: "treemap",
@@ -365,7 +375,7 @@ export function parseChartSpec(
       height,
       option: {
         ...baseTheme,
-        tooltip: { ...((baseTheme.tooltip as Record<string, unknown>) || {}), trigger: "item" },
+        tooltip: { ...baseTooltip, trigger: "item" },
         legend: {
           bottom: 0,
           textStyle: { color: mutedColor, fontSize: 12 },
@@ -416,7 +426,7 @@ export function parseChartSpec(
         option: {
           ...baseTheme,
           tooltip: {
-            ...((baseTheme.tooltip as Record<string, unknown>) || {}),
+            ...baseTooltip,
             trigger: "item",
             formatter: "{b}: <b>{c}</b> ({d}%)"
           },
@@ -433,7 +443,7 @@ export function parseChartSpec(
               },
               label: { color: textColor, fontSize: 12 },
               data: records.map((r) => ({
-                name: String(r.category ?? r.name ?? r.label ?? ""),
+                name: asText(r.category ?? r.name ?? r.label, ""),
                 value: Number(r.value ?? 0)
               }))
             }
@@ -443,10 +453,10 @@ export function parseChartSpec(
     }
 
     const categories = Array.from(
-      new Set(records.map((r) => String(r.category ?? r.time ?? r.name ?? r.x ?? "")))
+      new Set(records.map((r) => asText(r.category ?? r.time ?? r.name ?? r.x, "")))
     );
     const groups = Array.from(
-      new Set(records.map((r) => (r.group !== undefined ? String(r.group) : "Value")))
+      new Set(records.map((r) => (r.group !== undefined ? asText(r.group, "Value") : "Value")))
     );
     const activeMode = overrideMode !== "default" ? overrideMode : chartType;
     const mappedType = activeMode === "column" ? "bar" : activeMode === "area" ? "line" : activeMode;
@@ -461,8 +471,8 @@ export function parseChartSpec(
       data: categories.map((c) => {
         const hit = records.find(
           (r) =>
-            String(r.category ?? r.time ?? r.name ?? r.x ?? "") === c &&
-            (r.group !== undefined ? String(r.group) : "Value") === g
+            asText(r.category ?? r.time ?? r.name ?? r.x, "") === c &&
+            (r.group !== undefined ? asText(r.group, "Value") : "Value") === g
         );
         return hit ? Number(hit.value ?? hit.y ?? 0) : 0;
       })
@@ -476,7 +486,7 @@ export function parseChartSpec(
       switchableCartesian: true,
       tabularBackup: {
         headers: ["维度", ...groups],
-        rows: categories.map((c, rIdx) => [c, ...series.map((s) => String((s.data as number[])[rIdx] ?? 0))])
+        rows: categories.map((c, rIdx) => [c, ...series.map((s) => String(s.data[rIdx] ?? 0))])
       },
       option: buildCartesianOption(
         baseTheme,
@@ -510,7 +520,7 @@ export function parseChartSpec(
         option: {
           ...baseTheme,
           tooltip: {
-            ...((baseTheme.tooltip as Record<string, unknown>) || {}),
+            ...baseTooltip,
             trigger: "item",
             formatter: "{b}: <b>{c}</b> ({d}%)"
           },

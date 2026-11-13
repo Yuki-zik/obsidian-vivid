@@ -19,6 +19,14 @@ function isIncomplete(raw: string): boolean {
   return last !== "]" && last !== "}";
 }
 
+function asText(val: unknown, fallback: string): string {
+  if (typeof val === "string") return val;
+  if (typeof val === "number" || typeof val === "boolean" || typeof val === "bigint") {
+    return String(val);
+  }
+  return fallback;
+}
+
 export function parseKpiSpec(rawSource: string): ParsedKpiResult {
   const cleaned = rawSource.trim();
   if (!cleaned) return { status: "streaming" };
@@ -56,9 +64,14 @@ export function parseKpiSpec(rawSource: string): ParsedKpiResult {
 
   const items: KpiMetricItem[] = rawItems.map((entry) => {
     const rec = (entry ?? {}) as Record<string, unknown>;
-    const label = String(rec.label ?? rec.name ?? rec.title ?? "Metric");
-    const value = String(rec.value ?? "-");
-    const delta = rec.delta !== undefined ? String(rec.delta) : rec.change !== undefined ? String(rec.change) : undefined;
+    const label = asText(rec.label ?? rec.name ?? rec.title, "Metric");
+    const value = asText(rec.value, "-");
+    const delta =
+      rec.delta !== undefined
+        ? asText(rec.delta, "")
+        : rec.change !== undefined
+          ? asText(rec.change, "")
+          : undefined;
     const caption = typeof rec.caption === "string" ? rec.caption : typeof rec.description === "string" ? rec.description : undefined;
 
     let trend: "up" | "down" | "neutral" = "neutral";

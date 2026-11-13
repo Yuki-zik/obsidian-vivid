@@ -13,7 +13,7 @@ export function collectVaultNoteRecords(app: App): VaultNoteRecord[] {
     );
     const d = new Date(file.stat.ctime);
     const ctimeMonth = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
-    const fm = (cache?.frontmatter as Record<string, unknown> | undefined) ?? {};
+    const fm: Record<string, unknown> = cache?.frontmatter ?? {};
 
     return {
       path: file.path,
@@ -35,9 +35,7 @@ export function getNoteFrontmatter(
   if (!sourcePath) return undefined;
   const abstract = app.vault.getAbstractFileByPath(sourcePath);
   if (abstract instanceof TFile) {
-    return app.metadataCache.getFileCache(abstract)?.frontmatter as
-      | Record<string, unknown>
-      | undefined;
+    return app.metadataCache.getFileCache(abstract)?.frontmatter;
   }
   return undefined;
 }
@@ -126,14 +124,14 @@ export async function exportTableToObsidianBase(
   const bundle = generateBaseBundleFromTable(baseName, folderRoot, data);
 
   for (const dir of ["Bases", folderRoot, bundle.itemsFolderPath]) {
-    if (!(await app.vault.adapter.exists(dir))) {
+    if (!app.vault.getAbstractFileByPath(normalizePath(dir))) {
       await app.vault.createFolder(dir);
     }
   }
 
   for (const note of bundle.rowNotes) {
     const p = normalizePath(note.path);
-    if (!(await app.vault.adapter.exists(p))) {
+    if (!app.vault.getAbstractFileByPath(p)) {
       await app.vault.create(p, note.content);
     }
   }
@@ -157,7 +155,7 @@ export async function saveAndOpenJsonCanvas(
   prefix = "GPT-Diagram"
 ): Promise<void> {
   const folder = "Canvases";
-  if (!(await app.vault.adapter.exists(folder))) {
+  if (!app.vault.getAbstractFileByPath(folder)) {
     await app.vault.createFolder(folder);
   }
   const stamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
