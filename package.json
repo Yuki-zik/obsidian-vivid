@@ -1,0 +1,50 @@
+{
+  "name": "obsidian-vivid",
+  "version": "0.3.0",
+  "description": "ChatGPT & Claude-grade interactive visual rendering fused with Obsidian Bases, Canvas, Properties & Wikilinks: super-tables, offline ECharts, live Vault analytics, pan-zoom SVGs, KPIs, and sandboxed HTML artifacts.",
+  "author": "A-Znk (https://github.com/Yuki-zik)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yuki-zik/obsidian-vivid.git"
+  },
+  "homepage": "https://github.com/Yuki-zik/obsidian-vivid#readme",
+  "bugs": {
+    "url": "https://github.com/Yuki-zik/obsidian-vivid/issues"
+  },
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "sync": "pnpm run build && node scripts/sync-vaults.mjs",
+    "promo": "node scripts/record-promo-video.mjs",
+    "test": "vitest run",
+    "typecheck": "tsc -noEmit -skipLibCheck"
+  },
+  "keywords": [
+    "vivid",
+    "obsidian-plugin",
+    "obsidian-bases",
+    "obsidian-canvas",
+    "chatgpt",
+    "claude-artifacts",
+    "generative-ui",
+    "echarts",
+    "svg",
+    "interactive-table"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "dompurify": "^3.2.4",
+    "echarts": "^5.6.0"
+  },
+  "devDependencies": {
+    "@types/dompurify": "^3.0.5",
+    "@types/node": "^22.10.0",
+    "esbuild": "^0.24.2",
+    "jsdom": "^25.0.1",
+    "obsidian": "latest",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

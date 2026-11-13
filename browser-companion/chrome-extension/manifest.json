@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Vivid — Send to Obsidian",
+  "version": "0.3.0",
+  "description": "One-click lossless export of ChatGPT & Claude rich responses (tables, SVGs, charts, artifacts, markdown) straight into Obsidian.",
+  "permissions": ["clipboardWrite"],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://chat.openai.com/*",
+    "https://claude.ai/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*",
+        "https://claude.ai/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "vivid",
+  "name": "Vivid",
+  "version": "0.3.0",
+  "minAppVersion": "1.5.0",
+  "description": "ChatGPT & Claude-grade interactive visual rendering fused with Obsidian Bases, Canvas, Properties & Wikilinks: super-tables, offline ECharts, live Vault analytics, pan-zoom SVGs, KPIs, and sandboxed HTML artifacts.",
+  "author": "A-Znk",
+  "authorUrl": "https://github.com/Yuki-zik",
+  "isDesktopOnly": false
+}
