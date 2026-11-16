@@ -16,9 +16,9 @@
 
 <br/>
 
-![Vivid 实机操作演示（60fps 因果同框版）](./docs/assets/hero-demo.gif)
+![Vivid 实机操作演示（60fps 因果同框版）](https://raw.githubusercontent.com/Yuki-zik/obsidian-vivid/main/docs/assets/hero-demo.gif)
 
-🎬 **[查看 1080p 60fps 高清完整宣传片 (`vivid-promo.mp4`)](./docs/assets/vivid-promo.mp4)** · 本地可复现命令：`npm run promo`
+🎬 **[查看 1080p 60fps 高清完整宣传片 (`vivid-promo.mp4`)](https://github.com/Yuki-zik/obsidian-vivid/blob/main/docs/assets/vivid-promo.mp4)** · 本地可复现命令：`npm run promo`
 
 </div>
 
@@ -84,15 +84,23 @@
 
 ## 📦 极速安装
 
-### 方式一：Obsidian BRAT 一键安装（最省心）
+### 方式一：Obsidian 官方社区插件市场直接安装（推荐）
+1. 打开 Obsidian **设置 → 第三方插件（Community plugins）**（若处于安全模式，先点击 **Exit Restricted mode（关闭安全模式）** → **Turn on community plugins**）。
+2. 点击 **Browse（浏览）**，直接搜索 **`Vivid`**（作者：`a-znk`），或点击直达链接：[Obsidian 社区目录条目](https://obsidian.md/plugins?id=vivid)。
+3. 点击 **Install（安装）**，随后点击 **Enable（启用）** 即可。
+4. 推荐打开 [examples/Vivid-Showcase.md](./examples/Vivid-Showcase.md) 或按 `Cmd/Ctrl + P` 输入 `Vivid` 立即体验全部交互卡片与图表。
+
+> **收录说明：** Vivid（`0.3.3`）已正式上线 Obsidian 官方社区插件目录；在 Obsidian 团队完成首次人工代码复核前，目录卡片会显示官方统一的「尚未经 Obsidian 员工人工审核」提示。
+
+### 方式二：Obsidian BRAT 安装（抢先体验测试版）
 1. 在 Obsidian 安装并打开社区插件 **BRAT (Beta Reviewers Auto-update Tester)**；
 2. 点击 **`Add Beta plugin`**，输入仓库地址：`Yuki-zik/obsidian-vivid`；
 3. 在 **设置 → 第三方插件** 中开启 **Vivid** 即可自动接收更新。
 
-### 方式二：手动下载 Release 产物
+### 方式三：手动下载 Release 产物
 从 **[GitHub Releases](https://github.com/Yuki-zik/obsidian-vivid/releases)** 下载最新版本的 `main.js`、`manifest.json`、`styles.css`，放入 `<你的知识库>/.obsidian/plugins/vivid/` 目录，重载并启用插件即可。
 
-### 方式三：源码编译并一键同步至本机所有 Obsidian Vault
+### 方式四：源码编译并一键同步至本机所有 Obsidian Vault
 ```bash
 git clone https://github.com/Yuki-zik/obsidian-vivid.git
 cd obsidian-vivid

@@ -16,9 +16,9 @@
 
 <br/>
 
-![Vivid Interactive Demo (60fps Capture)](./docs/assets/hero-demo.gif)
+![Vivid Interactive Demo (60fps Capture)](https://raw.githubusercontent.com/Yuki-zik/obsidian-vivid/main/docs/assets/hero-demo.gif)
 
-🎬 **[Watch 1080p 60fps Promo Video (`vivid-promo.mp4`)](./docs/assets/vivid-promo.mp4)** · Reproduce locally via `npm run promo`
+🎬 **[Watch 1080p 60fps Promo Video (`vivid-promo.mp4`)](https://github.com/Yuki-zik/obsidian-vivid/blob/main/docs/assets/vivid-promo.mp4)** · Reproduce locally via `npm run promo`
 
 </div>
 
@@ -86,17 +86,24 @@ Includes responsive KPI sparkline cards, vertical roadmaps, side-by-side compari
 
 ## Installation & Workflows
 
-### 1. Install in Obsidian
-- **Community Plugins**: Install and enable **Vivid** directly from **Settings → Community plugins → Browse** (once approved).
+### 1. Install from Obsidian Community Plugins (Recommended)
+1. Open **Settings → Community plugins** in Obsidian (if Restricted mode is enabled, click **Exit Restricted mode** → **Turn on community plugins**).
+2. Click **Browse**, search for **`Vivid`** *(by `a-znk`)* — or open the [Obsidian Community Directory listing](https://obsidian.md/plugins?id=vivid).
+3. Click **Install**, then click **Enable**.
+4. Open [examples/Vivid-Showcase.md](./examples/Vivid-Showcase.md) inside a note or run **`Cmd/Ctrl + P` → `Vivid`** to try every interactive block right away.
+
+> **Directory Status:** Vivid (`0.3.3`) is live in Obsidian's official Community Plugins catalog. Until Obsidian staff finish their initial manual code review, the listing shows Obsidian's standard *"not been manually reviewed by Obsidian staff"* notice.
+
+### 2. Alternative Install Methods
 - **Obsidian BRAT**: Open **BRAT** → **Add Beta plugin** → enter `Yuki-zik/obsidian-vivid` → enable **Vivid**.
 - **Manual Release Install**: Download `main.js`, `manifest.json`, and `styles.css` from [GitHub Releases](https://github.com/Yuki-zik/obsidian-vivid/releases) into `<YourVault>/.obsidian/plugins/vivid/`.
 
-### 2. Companion Integrations (Optional)
+### 3. Companion Integrations (Optional)
 - **Browser Companion (`browser-companion/`)**: Chrome/Edge MV3 extension and Tampermonkey script that add a `Send to Obsidian ✨` button on `chatgpt.com` and `claude.ai` via `obsidian://vivid-import`.
 - **AI System Prompt (`GPT-CUSTOM-INSTRUCTIONS.md`)**: Run command **`Copy GPT Rich Instructions`** (`Cmd/Ctrl + P`) and paste into ChatGPT Custom Instructions or Obsidian Copilot / Agent Client so streamed AI responses render live as charts, super-tables, and diagrams.
 - **Editor Selection Transform**: Highlight text in the editor, right-click, and convert it into SVG, Chart, Super-Table, or Artifact (uses your configured API key or copies the structured prompt to clipboard in zero-API-key mode).
 
-### 3. Build from Source
+### 4. Build from Source
 ```bash
 git clone https://github.com/Yuki-zik/obsidian-vivid.git
 cd obsidian-vivid
