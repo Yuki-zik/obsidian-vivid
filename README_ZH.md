@@ -10,6 +10,7 @@
 [![Offline Ready](https://img.shields.io/badge/Network-100%25%20Offline%20%2F%20Zero%20CDN-10b981.svg)](#安全与本地优先架构)
 [![Tests](https://img.shields.io/badge/Tests-35%2F35%20Passing-0ea5e9.svg)](./tests)
 [![License: MIT](https://img.shields.io/badge/License-MIT-6366f1.svg)](./LICENSE)
+[![反馈与许愿](https://img.shields.io/badge/反馈与许愿-Discussions-14b8a6.svg)](https://github.com/Yuki-zik/obsidian-vivid/discussions)
 [![English Docs](https://img.shields.io/badge/Docs-English-f59e0b.svg)](./README.md)
 
 *不只是复刻网页端 AI 的视觉体验——更能把 AI 生成的每一张超级表格一键沉淀为 **Obsidian 原生 `.base` 数据库**，把每一幅 SVG 流程图与时间轴一键转化为 **原生 `.canvas` 无限白板**，让富交互组件真正长在你的第二大脑双链图谱里。*
@@ -37,22 +38,22 @@
 | **5. `{{fm.key}}` 笔记属性双向响应式绑定** | 改了笔记顶部的项目进度或实验指标，正文里的仪表盘还要手动改一遍 | 所有图表、KPI、表格原生支持 `{{fm.属性名 \| 默认值}}` 插值（自动保护行内代码字面量），修改顶部 YAML Properties 瞬间触发组件免刷新重绘 |
 
 ### 实机渲染：Vault 实时元数据引擎 (`vault-kpi` + `vault-chart`) 与原生资产一键转化
-![Vault 实时元数据聚合面板实拍](./docs/assets/vault-native-pulse.png)
+![Vault 实时元数据聚合面板实拍](https://raw.githubusercontent.com/Yuki-zik/obsidian-vivid/main/docs/assets/vault-native-pulse.png)
 
-![超级表格转原生 Base 数据库、双链悬停激活与时间轴转 Canvas 白板](./docs/assets/vault-native-bridges.png)
+![超级表格转原生 Base 数据库、双链悬停激活与时间轴转 Canvas 白板](https://raw.githubusercontent.com/Yuki-zik/obsidian-vivid/main/docs/assets/vault-native-bridges.png)
 
 ---
 
 ## 🖼️ GPT 原生富交互组件全景画廊
 
 ### 1. 全谱系离线 ECharts 图表（右上角支持「柱状 | 折线 | 面积 | 数据表」四态秒切 + 桑基流向图）
-![全谱系交互图表与桑基图](./docs/assets/charts-switchable-sankey.png)
+![全谱系交互图表与桑基图](https://raw.githubusercontent.com/Yuki-zik/obsidian-vivid/main/docs/assets/charts-switchable-sankey.png)
 
 ### 2. 超级交互数据大表（无感增强普通 Markdown 表格：搜索、智能数值排序、渐变进度条、`∑ 汇总`、CSV 导出）
-![超级数据大表实拍](./docs/assets/supertable-comparison.png)
+![超级数据大表实拍](https://raw.githubusercontent.com/Yuki-zik/obsidian-vivid/main/docs/assets/supertable-comparison.png)
 
 ### 3. 结构化卡片矩阵 & 隔离沙箱微应用（双栏优劣 PK 卡 · 时间轴 · 点击判分自测卡 · 动态调参计算器）
-![方案对比卡、时间轴与交互自测卡](./docs/assets/timeline-quiz-artifact.png)
+![方案对比卡、时间轴与交互自测卡](https://raw.githubusercontent.com/Yuki-zik/obsidian-vivid/main/docs/assets/timeline-quiz-artifact.png)
 
 ---
 
@@ -133,6 +134,16 @@ npm run sync    # 自动编译打包并同步至本机已注册的所有 Obsidia
 5. **超级交互表格（原生 Markdown 表格自动升级 或 `gpt-table`）**：无符号百分比自动变渐变进度条、带正负号数值变红绿胶囊、支持 `[[双链]]` / `#标签` / `∑ 汇总` 与一键 `转 Base 库`。
 6. **结构化卡片（`timeline` · `comparison` · `quiz`）**：时间轴支持一键 `转 Canvas 白板`，自测题支持点击即时判分与解析展开。
 7. **隔离沙箱微应用 (`artifact`)**：放入自包含 HTML/CSS/JS，自动注入 Obsidian 亮暗主题变量并自适应撑开高度。
+
+---
+
+## 💬 轻松反馈与功能许愿（30 秒直达）
+
+遇到某段 AI 输出渲染不够美观、或者希望增加新的图表 / `.base` / `.canvas` 导出玩法？**不需要复杂模板，一句话或粘贴一段原文就能提交**：
+
+- **💬 自由留言 & 用法讨论（[GitHub Discussions](https://github.com/Yuki-zik/obsidian-vivid/discussions)）** — 零门槛发帖：提建议、问配置、晒出你的 Obsidian 仪表盘。
+- **🎨 30 秒提交异常片段（[直接粘贴问题片段](https://github.com/Yuki-zik/obsidian-vivid/issues/new?template=broken_render.yml)）** — 只需贴入 Markdown/JSON 原文或拖入一张截图，无需翻找控制台日志。
+- **💡 一句话许愿新功能（[极简许愿表单](https://github.com/Yuki-zik/obsidian-vivid/issues/new?template=feature_idea.yml)）** — 告诉我你最希望补齐哪类图表或日常工作流。
 
 ---
 

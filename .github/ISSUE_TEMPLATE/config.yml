@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: "💬 Casual Idea, Question, or Quick Chat (GitHub Discussions)"
+    url: https://github.com/Yuki-zik/obsidian-vivid/discussions
+    about: "No form needed — drop a one-sentence wish, ask a workflow question, or share a screenshot."
+  - name: "✨ Official Obsidian Plugin Page"
+    url: https://community.obsidian.md/plugins/vivid
+    about: "View Vivid on the Obsidian Community Directory or share the install link."

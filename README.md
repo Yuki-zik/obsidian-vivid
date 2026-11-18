@@ -2,7 +2,7 @@
 
 # ✨ Vivid
 
-**Make AI & Markdown Notes Come Alive — ChatGPT & Claude-grade interactive visual rendering, deeply fused with Obsidian Bases, Canvas, Properties, and Wikilinks.**
+**Stop letting ChatGPT & Claude replies die as walls of flat Markdown — Vivid turns tables, JSON, and SVGs into interactive charts, sortable super-tables, native Obsidian `.base` databases, and `.canvas` whiteboards.**
 
 [![Release](https://img.shields.io/github/v/release/Yuki-zik/obsidian-vivid?color=ec4899&label=Release)](https://github.com/Yuki-zik/obsidian-vivid/releases)
 [![CI](https://github.com/Yuki-zik/obsidian-vivid/actions/workflows/ci.yml/badge.svg)](https://github.com/Yuki-zik/obsidian-vivid/actions/workflows/ci.yml)
@@ -10,9 +10,10 @@
 [![Offline Ready](https://img.shields.io/badge/Network-100%25%20Offline%20%2F%20Zero%20CDN-10b981.svg)](#privacy-permissions--network-disclosure)
 [![Tests](https://img.shields.io/badge/Tests-35%2F35%20Passing-0ea5e9.svg)](./tests)
 [![License: MIT](https://img.shields.io/badge/License-MIT-6366f1.svg)](./LICENSE)
+[![Feedback & Ideas](https://img.shields.io/badge/Feedback_%26_Ideas-Discussions-14b8a6.svg)](https://github.com/Yuki-zik/obsidian-vivid/discussions)
 [![简体中文](https://img.shields.io/badge/文档-简体中文-f59e0b.svg)](./README_ZH.md)
 
-*Not just recreating web AI charts in Markdown — Vivid bridges AI-generated outputs directly into first-class **Obsidian `.base` databases**, **`.canvas` whiteboards**, **`metadataCache` analytics**, and **live `[[Wikilink]]` knowledge graphs**.*
+*Paste an AI answer or write plain Markdown: get instant KPI sparklines, offline ECharts, live `metadataCache` vault analytics, reactive `{{fm.key}}` bindings, and clickable `[[Wikilinks]]` — 100% local-first, zero CDN.*
 
 <br/>
 
@@ -37,9 +38,9 @@ Most visualization plugins stop at painting isolated diagrams inside a single no
 | **5. Reactive `{{fm.key}}` Property Binding** | Updating frontmatter metrics forces manual edits in note charts | Interpolates `{{fm.property \| fallback}}` across `kpi`, `chart`, `gpt-table`, and `gpt-ui` blocks (preserving inline code literals) and refreshes on metadata save |
 
 ### Live Showcase
-![Vault Live Metadata Analytics](./docs/assets/vault-native-pulse.png)
+![Vault Live Metadata Analytics](https://raw.githubusercontent.com/Yuki-zik/obsidian-vivid/main/docs/assets/vault-native-pulse.png)
 
-![Super-Table to Obsidian Base & Canvas Exporters](./docs/assets/vault-native-bridges.png)
+![Super-Table to Obsidian Base & Canvas Exporters](https://raw.githubusercontent.com/Yuki-zik/obsidian-vivid/main/docs/assets/vault-native-bridges.png)
 
 ---
 
@@ -48,17 +49,17 @@ Most visualization plugins stop at painting isolated diagrams inside a single no
 ### 1. Offline Apache ECharts (`chart`, `gpt-chart`, `echarts`)
 Supports `bar`, `horizontalBar`, `line`, `area`, `pie`, `doughnut`, `radar`, `sankey`, `heatmap`, `gauge`, `treemap`, and native ECharts `option` specs — with one-click switching between **Bar | Line | Area | Underlying Data Table**, `2x PNG` export, and lightbox fullscreen zoom.
 
-![Switchable Charts & Sankey Flow](./docs/assets/charts-switchable-sankey.png)
+![Switchable Charts & Sankey Flow](https://raw.githubusercontent.com/Yuki-zik/obsidian-vivid/main/docs/assets/charts-switchable-sankey.png)
 
 ### 2. Automatic Super-Tables (Standard Markdown Tables & `gpt-table`)
 Automatically upgrades Markdown tables in Reading View and AI chat sidebars with instant keyword search, unit/currency-aware numeric sorting, `∑` summary footers (`avg` / `sum`), percentage progress bars, delta pills (`+18.5%` / `-12.0%`), semantic status badges, CSV/Markdown export, and `.base` export.
 
-![Interactive Super-Table Showcase](./docs/assets/supertable-comparison.png)
+![Interactive Super-Table Showcase](https://raw.githubusercontent.com/Yuki-zik/obsidian-vivid/main/docs/assets/supertable-comparison.png)
 
 ### 3. Structured Cards, Quizzes & Sandboxed Artifacts (`kpi`, `timeline`, `comparison`, `quiz`, `artifact`)
 Includes responsive KPI sparkline cards, vertical roadmaps, side-by-side comparison grids, interactive self-check quizzes, and live HTML/CSS/JS widgets isolated inside opaque-origin `<iframe sandbox="allow-scripts">` containers.
 
-![Comparison, Timeline, Quiz & Sandboxed Artifact](./docs/assets/timeline-quiz-artifact.png)
+![Comparison, Timeline, Quiz & Sandboxed Artifact](https://raw.githubusercontent.com/Yuki-zik/obsidian-vivid/main/docs/assets/timeline-quiz-artifact.png)
 
 ---
 
@@ -113,6 +114,16 @@ npm test
 npm run build
 ```
 Open [examples/Vivid-Showcase.md](./examples/Vivid-Showcase.md) inside Obsidian to test every block type.
+
+---
+
+## Feedback, Ideas & Quick Bug Drop
+
+Running into an AI snippet that renders oddly, or wishing for a new chart/export workflow? Pick whichever feels easiest — **one sentence or a pasted snippet is plenty**:
+
+- **💬 Casual Wishlist & Q&A ([GitHub Discussions](https://github.com/Yuki-zik/obsidian-vivid/discussions))** — No template required. Vote on ideas, ask usage questions, or show off your dashboards.
+- **🎨 30-Second Render Fix ([Paste a Weird Snippet](https://github.com/Yuki-zik/obsidian-vivid/issues/new?template=broken_render.yml))** — Drop the raw Markdown/JSON block or a screenshot; no console logs needed.
+- **💡 Feature Wish ([1-Box Idea Form](https://github.com/Yuki-zik/obsidian-vivid/issues/new?template=feature_idea.yml))** — Tell us what visual block or Obsidian integration would help your daily notes.
 
 ---
 

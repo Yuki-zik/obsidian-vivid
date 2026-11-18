@@ -1,0 +1,16 @@
+name: "💡 Feature Wish / New Visual Block"
+description: "Wish Vivid supported a new chart type, export format, or daily workflow? One sentence is plenty!"
+title: "[Idea]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Got an idea for a new visualization, `.base` / `.canvas` export shortcut, or workflow improvement? One sentence is plenty!
+  - type: textarea
+    id: wish
+    attributes:
+      label: "What would make Vivid more useful for your notes?"
+      placeholder: "e.g., Gantt chart block, Mermaid-to-Canvas export, or custom color palettes..."
+    validations:
+      required: true

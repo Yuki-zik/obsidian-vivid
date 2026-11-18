@@ -1,0 +1,30 @@
+name: "🎨 Render Glitch / Weird AI Output (30-Second Drop)"
+description: "A table, chart, SVG, or artifact didn't look right? Paste the snippet or screenshot — no technical logs required!"
+title: "[Render]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping make Vivid better! **You do NOT need console logs or technical steps** — just paste the Markdown/JSON/SVG snippet or drag in a screenshot below.
+  - type: textarea
+    id: snippet
+    attributes:
+      label: "What looked off? (Paste the Markdown block or drop a screenshot)"
+      description: "Paste the ChatGPT/Claude snippet or describe what happened in one sentence."
+      placeholder: |
+        Example: The pie chart clipped its legend on mobile / This table didn't turn into a super-table:
+        ```chart
+        ...
+        ```
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: "Where did this happen? (Optional)"
+      options:
+        - "Desktop (macOS / Windows / Linux)"
+        - "Mobile (iOS / Android)"
+    validations:
+      required: false
