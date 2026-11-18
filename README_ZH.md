@@ -19,7 +19,7 @@
 
 ![Vivid 实机操作演示（60fps 因果同框版）](https://raw.githubusercontent.com/Yuki-zik/obsidian-vivid/main/docs/assets/hero-demo.gif)
 
-🎬 **[查看 1080p 60fps 高清完整宣传片 (`vivid-promo.mp4`)](https://github.com/Yuki-zik/obsidian-vivid/blob/main/docs/assets/vivid-promo.mp4)** · 本地可复现命令：`npm run promo`
+🎬 **[查看 60fps 高清演示视频](https://github.com/Yuki-zik/obsidian-vivid/blob/main/docs/assets/vivid-promo.mp4)** · 💬 **[一句话许愿 / 留言讨论](https://github.com/Yuki-zik/obsidian-vivid/discussions/1)** · 🎨 **[30 秒粘贴异常片段](https://github.com/Yuki-zik/obsidian-vivid/issues/new?template=broken_render.yml)**
 
 </div>
 

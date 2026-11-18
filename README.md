@@ -2,7 +2,7 @@
 
 # ✨ Vivid
 
-**Stop letting ChatGPT & Claude replies die as walls of flat Markdown — Vivid turns tables, JSON, and SVGs into interactive charts, sortable super-tables, native Obsidian `.base` databases, and `.canvas` whiteboards.**
+**Turn flat ChatGPT & Claude replies — and everyday Markdown notes — into interactive charts, sortable super-tables, KPI cards, and study quizzes.**
 
 [![Release](https://img.shields.io/github/v/release/Yuki-zik/obsidian-vivid?color=ec4899&label=Release)](https://github.com/Yuki-zik/obsidian-vivid/releases)
 [![CI](https://github.com/Yuki-zik/obsidian-vivid/actions/workflows/ci.yml/badge.svg)](https://github.com/Yuki-zik/obsidian-vivid/actions/workflows/ci.yml)
@@ -13,13 +13,13 @@
 [![Feedback & Ideas](https://img.shields.io/badge/Feedback_%26_Ideas-Discussions-14b8a6.svg)](https://github.com/Yuki-zik/obsidian-vivid/discussions)
 [![简体中文](https://img.shields.io/badge/文档-简体中文-f59e0b.svg)](./README_ZH.md)
 
-*Paste an AI answer or write plain Markdown: get instant KPI sparklines, offline ECharts, live `metadataCache` vault analytics, reactive `{{fm.key}}` bindings, and clickable `[[Wikilinks]]` — 100% local-first, zero CDN.*
+*Export any AI table or diagram in one click into native **Obsidian `.base` databases** and **`.canvas` whiteboards** — 100% offline, plain-text safe, with live YAML property bindings and clickable `[[Wikilinks]]`.*
 
 <br/>
 
 ![Vivid Interactive Demo (60fps Capture)](https://raw.githubusercontent.com/Yuki-zik/obsidian-vivid/main/docs/assets/hero-demo.gif)
 
-🎬 **[Watch 1080p 60fps Promo Video (`vivid-promo.mp4`)](https://github.com/Yuki-zik/obsidian-vivid/blob/main/docs/assets/vivid-promo.mp4)** · Reproduce locally via `npm run promo`
+🎬 **[Watch 60fps Video Demo](https://github.com/Yuki-zik/obsidian-vivid/blob/main/docs/assets/vivid-promo.mp4)** · 💬 **[Drop a 1-Sentence Idea / Q&A](https://github.com/Yuki-zik/obsidian-vivid/discussions/1)** · 🎨 **[Paste a Weird Snippet (30s Fix)](https://github.com/Yuki-zik/obsidian-vivid/issues/new?template=broken_render.yml)**
 
 </div>
 
